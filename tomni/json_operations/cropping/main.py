@@ -4,7 +4,7 @@ from ...transformers import json2contours
 from ...contour_operations import get_center
 from ..translation import translation_json
 
-
+# created from `can you write python code crop_json function so it passed these unit tests:`
 def crop_json(input_json, x_move, y_move, inputDim):
     output_json = []
     for patch in input_json:
