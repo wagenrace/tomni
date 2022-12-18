@@ -67,6 +67,78 @@ class TestAddAreaJson(TestCase):
 
         self.assertDictEqual(json_object, expected_result)
 
+    def test_diamond(self):
+        json_object = {
+            "type": "polygon",
+            "points": [
+                {"x": 10, "y": 10},
+                {"x": 20, "y": 20},
+                {"x": 10, "y": 30},
+                {"x": 0, "y": 20},
+            ],
+            "id": "unicorn",
+            "parents": [],
+            "children": [],
+        }
+
+        expected_result = {
+            "type": "polygon",
+            "points": [
+                {"x": 10, "y": 10},
+                {"x": 20, "y": 20},
+                {"x": 10, "y": 30},
+                {"x": 0, "y": 20},
+            ],
+            "id": "unicorn",
+            "parents": [],
+            "children": [],
+            "area": 200.0,
+        }
+
+        add_area(json_object)
+
+        self.assertDictEqual(json_object, expected_result)
+
+    def test_octagon(self):
+        json_object = {
+            "type": "polygon",
+            "points": [
+                {"x": 10, "y": 10},
+                {"x": 20, "y": 10},
+                {"x": 30, "y": 20},
+                {"x": 30, "y": 30},
+                {"x": 20, "y": 40},
+                {"x": 10, "y": 40},
+                {"x": 00, "y": 30},
+                {"x": 00, "y": 20},
+            ],
+            "id": "unicorn",
+            "parents": [],
+            "children": [],
+        }
+
+        expected_result = {
+            "type": "polygon",
+            "points": [
+                {"x": 10, "y": 10},
+                {"x": 20, "y": 10},
+                {"x": 30, "y": 20},
+                {"x": 30, "y": 30},
+                {"x": 20, "y": 40},
+                {"x": 10, "y": 40},
+                {"x": 00, "y": 30},
+                {"x": 00, "y": 20},
+            ],
+            "id": "unicorn",
+            "parents": [],
+            "children": [],
+            "area": 700.0,
+        }
+
+        add_area(json_object)
+
+        self.assertDictEqual(json_object, expected_result)
+
     def test_circle(self):
         json_object = {
             "type": "circle",
@@ -107,6 +179,30 @@ class TestAddAreaJson(TestCase):
             "radiusX": 10,
             "radiusY": 12,
             "angleOfRotation": 0,
+            "id": "unicorn",
+            "area": math.pi * 10 * 12,
+        }
+
+        add_area(json_object)
+
+        self.assertDictEqual(json_object, expected_result)
+
+    def test_ellipse_rotated(self):
+        json_object = {
+            "type": "ellipse",
+            "center": {"x": 20, "y": 30},
+            "radiusX": 10,
+            "radiusY": 12,
+            "angleOfRotation": 30,
+            "id": "unicorn",
+        }
+
+        expected_result = {
+            "type": "ellipse",
+            "center": {"x": 20, "y": 30},
+            "radiusX": 10,
+            "radiusY": 12,
+            "angleOfRotation": 30,
             "id": "unicorn",
             "area": math.pi * 10 * 12,
         }
